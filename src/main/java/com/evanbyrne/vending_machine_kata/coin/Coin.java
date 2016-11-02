@@ -5,23 +5,28 @@ public enum Coin {
     DIME(10, 2, 1),
     NICKEL(5, 1, 2);
 
+    private final int cents;
+
+    private final int diameter;
+
+    private final int weight;
+
     Coin(final int cents, final int diameter, final int weight) {
-        // TODO: Implement.
+        this.cents = cents;
+        this.diameter = diameter;
+        this.weight = weight;
     }
 
     public int getCents() {
-        // TODO: Implement.
-        return -1;
+        return this.cents;
     }
 
     public int getDiameter() {
-        // TODO: Implement.
-        return -1;
+        return this.diameter;
     }
 
     public int getWeight() {
-        // TODO: Implement.
-        return -1;
+        return this.weight;
     }
 
 }
