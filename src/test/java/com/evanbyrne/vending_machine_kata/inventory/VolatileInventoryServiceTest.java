@@ -32,20 +32,20 @@ public class VolatileInventoryServiceTest {
         assertEquals(null, inventory.vendProduct("A"));
 
         inventory.setProduct("A", new InventoryProduct("foo", 5));
-        inventoryProduct = inventory.vendProduct("foo");
+        inventoryProduct = inventory.vendProduct("A");
         assertNotEquals(null, inventoryProduct);
         assertEquals(4, inventoryProduct.getStock());
 
         inventory.setProduct("B", new InventoryProduct("foo", 2));
-        inventoryProduct = inventory.vendProduct("foo");
+        inventoryProduct = inventory.vendProduct("B");
         assertNotEquals(null, inventoryProduct);
         assertEquals(1, inventoryProduct.getStock());
 
-        inventoryProduct = inventory.vendProduct("foo");
+        inventoryProduct = inventory.vendProduct("B");
         assertNotEquals(null, inventoryProduct);
         assertEquals(0, inventoryProduct.getStock());
 
-        inventoryProduct = inventory.vendProduct("foo");
+        inventoryProduct = inventory.vendProduct("B");
         assertEquals(null, inventoryProduct);
     }
 
