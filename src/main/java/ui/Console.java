@@ -6,9 +6,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.SortedMap;
 
+import org.jooq.lambda.tuple.Tuple2;
+
 import com.evanbyrne.vending_machine_kata.coin.Cents;
 import com.evanbyrne.vending_machine_kata.coin.Coin;
 import com.evanbyrne.vending_machine_kata.coin.CoinCollection;
+import com.evanbyrne.vending_machine_kata.coin.CoinFactory;
 import com.evanbyrne.vending_machine_kata.inventory.IInventoryService;
 import com.evanbyrne.vending_machine_kata.inventory.InventoryProduct;
 
@@ -63,13 +66,41 @@ public class Console {
     }
 
     public CoinCollection promptForPayment(final Scanner scanner, final InventoryProduct selection) {
-        // TODO: Not implemented.
-        return null;
+        final CoinCollection paid = new CoinCollection();
+        Coin insert;
+        String input;
+
+        do {
+            System.out.println("PRICE: " + Cents.toString(selection.getCents()));
+            do {
+                System.out.print(String.format("INSERT COIN (%s): ", Cents.toString(paid.getTotal())));
+                input = scanner.nextLine();
+                insert = CoinFactory.getByName(input);
+                if(insert == null) {
+                    System.out.println("Invalid coin. This machine accepts: quarter, dime, nickel.");
+                }
+            } while(insert == null);
+            paid.addCoin(insert);
+        } while(paid.getTotal() < selection.getCents());
+
+        return paid;
     }
 
-    public InventoryProduct promptForSelection(final Scanner scanner, final IInventoryService inventoryService) {
-        // TODO: Not implemented.
-        return null;
+    public Tuple2<String, InventoryProduct> promptForSelection(final Scanner scanner, final IInventoryService inventoryService) {
+        InventoryProduct selection;
+        String input;
+
+        do {
+            System.out.print("SELECT: ");
+            input = scanner.nextLine();
+            selection = inventoryService.getProduct(input);
+
+            if( selection == null ) {
+                System.out.println("Invalid selection.");
+            }
+        } while(selection == null);
+
+        return new Tuple2<String, InventoryProduct>(input, selection);
     }
 
 }

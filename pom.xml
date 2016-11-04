@@ -21,5 +21,10 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.jooq</groupId>
+      <artifactId>jool</artifactId>
+      <version>0.9.11</version>
+    </dependency>
   </dependencies>
 </project>
