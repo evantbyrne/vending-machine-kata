@@ -2,6 +2,9 @@ package ui;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -9,7 +12,9 @@ import org.junit.Test;
 
 import com.evanbyrne.vending_machine_kata.coin.Coin;
 import com.evanbyrne.vending_machine_kata.coin.CoinCollection;
+import com.evanbyrne.vending_machine_kata.inventory.IInventoryService;
 import com.evanbyrne.vending_machine_kata.inventory.InventoryProduct;
+import com.evanbyrne.vending_machine_kata.inventory.VolatileInventoryService;
 
 public class ConsoleTest {
 
@@ -49,6 +54,44 @@ public class ConsoleTest {
 
         inventory.put("B", new InventoryProduct("baz", 1, 265));
         assertEquals("A\t$1.00\tfoo\nB\t$2.65\tbaz\nC\t$1.25\tbar", console.getProductDisplay(inventory));
+    }
+
+    @Test(expected=NoSuchElementException.class)
+    public void testPromptForPaymentBad() {
+        final Console console = new Console();
+        final Scanner scanner = new Scanner(new ByteArrayInputStream("penny\n".getBytes()));
+        final InventoryProduct selection = new InventoryProduct("cola", 1, 65);
+        assertNull(console.promptForPayment(scanner, selection));
+    }
+
+    @Test
+    public void testPromptForPaymentGood() {
+        final Console console = new Console();
+        final Scanner scanner = new Scanner(new ByteArrayInputStream("quarter\nquarter\nquarter\n".getBytes()));
+        final InventoryProduct selection = new InventoryProduct("cola", 1, 65);
+        final CoinCollection paid = console.promptForPayment(scanner, selection);
+        assertNotNull(paid);
+        assertEquals(75, paid.getTotal());
+    }
+
+    @Test(expected=NoSuchElementException.class)
+    public void testPromptForSelectionBad() {
+        final Console console = new Console();
+        final IInventoryService inventoryService = new VolatileInventoryService();
+        final Scanner scanner = new Scanner(new ByteArrayInputStream("C\n".getBytes()));
+        inventoryService.setProduct("A", new InventoryProduct("cola", 5, 100));
+        inventoryService.setProduct("B", new InventoryProduct("bar", 2, 50));
+        assertNull(console.promptForSelection(scanner, inventoryService));
+    }
+
+    @Test
+    public void testPromptForSelectionGood() {
+        final Console console = new Console();
+        final IInventoryService inventoryService = new VolatileInventoryService();
+        final Scanner scanner = new Scanner(new ByteArrayInputStream("A\n".getBytes()));
+        inventoryService.setProduct("A", new InventoryProduct("cola", 5, 100));
+        inventoryService.setProduct("B", new InventoryProduct("bar", 2, 50));
+        assertNotNull(console.promptForSelection(scanner, inventoryService));
     }
 
 }

@@ -3,11 +3,13 @@ package ui;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.SortedMap;
 
 import com.evanbyrne.vending_machine_kata.coin.Cents;
 import com.evanbyrne.vending_machine_kata.coin.Coin;
 import com.evanbyrne.vending_machine_kata.coin.CoinCollection;
+import com.evanbyrne.vending_machine_kata.inventory.IInventoryService;
 import com.evanbyrne.vending_machine_kata.inventory.InventoryProduct;
 
 public class Console {
@@ -58,6 +60,16 @@ public class Console {
         }
 
         return "No items in vending machine.";
+    }
+
+    public CoinCollection promptForPayment(final Scanner scanner, final InventoryProduct selection) {
+        // TODO: Not implemented.
+        return null;
+    }
+
+    public InventoryProduct promptForSelection(final Scanner scanner, final IInventoryService inventoryService) {
+        // TODO: Not implemented.
+        return null;
     }
 
 }
