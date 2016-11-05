@@ -28,14 +28,15 @@ public class VolatileInventoryService implements IInventoryService {
 
         if(inventoryProduct != null) {
             final int newStock = inventoryProduct.getStock() - 1;
+            final InventoryProduct newInventoryProduct = new InventoryProduct(inventoryProduct.getName(), newStock, inventoryProduct.getCents());
 
-            if(newStock >= 0) {
-                final InventoryProduct newInventoryProduct = new InventoryProduct(inventoryProduct.getName(), newStock, inventoryProduct.getCents());
+            if(newStock > 0) {
                 this.setProduct(key, newInventoryProduct);
-                return newInventoryProduct;
+            } else {
+                this.inventory.remove(key);
             }
 
-            this.inventory.remove(key);
+            return newInventoryProduct;
         }
 
         return null;
