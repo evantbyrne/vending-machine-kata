@@ -34,9 +34,7 @@ public class App {
             // Vend and return change
             inventoryService.vendProduct(selection.v1);
             final int changeTotal = paid.getTotal() - selection.v2.getCents();
-            if(changeTotal > 0) {
-                System.out.println(console.getChangeDisplay(paid.makeChange(changeTotal)));
-            }
+            System.out.println(console.getChangeDisplay(paid.makeChange(changeTotal)));
 
             // Continue?
             System.out.print("CONTINUE (yes/no): ");
