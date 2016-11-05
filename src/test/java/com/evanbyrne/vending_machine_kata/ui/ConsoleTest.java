@@ -1,4 +1,4 @@
-package ui;
+package com.evanbyrne.vending_machine_kata.ui;
 
 import static org.junit.Assert.*;
 
@@ -15,6 +15,7 @@ import com.evanbyrne.vending_machine_kata.coin.CoinCollection;
 import com.evanbyrne.vending_machine_kata.inventory.IInventoryService;
 import com.evanbyrne.vending_machine_kata.inventory.InventoryProduct;
 import com.evanbyrne.vending_machine_kata.inventory.VolatileInventoryService;
+import com.evanbyrne.vending_machine_kata.ui.Console;
 
 public class ConsoleTest {
 

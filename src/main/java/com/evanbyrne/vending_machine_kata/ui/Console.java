@@ -1,4 +1,4 @@
-package ui;
+package com.evanbyrne.vending_machine_kata.ui;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
