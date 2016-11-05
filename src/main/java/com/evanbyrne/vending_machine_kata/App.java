@@ -8,8 +8,7 @@ import com.evanbyrne.vending_machine_kata.coin.CoinCollection;
 import com.evanbyrne.vending_machine_kata.inventory.IInventoryService;
 import com.evanbyrne.vending_machine_kata.inventory.InventoryProduct;
 import com.evanbyrne.vending_machine_kata.inventory.VolatileInventoryService;
-
-import ui.Console;
+import com.evanbyrne.vending_machine_kata.ui.Console;
 
 public class App {
 
