@@ -48,8 +48,8 @@ public class VolatileInventoryServiceTest {
         assertNotEquals(null, inventoryProduct);
         assertEquals(0, inventoryProduct.getStock());
 
-        inventoryProduct = inventory.vendProduct("B");
-        assertEquals(null, inventoryProduct);
+        inventoryProduct = inventory.getProduct("B");
+        assertNull(inventoryProduct);
     }
 
 }
