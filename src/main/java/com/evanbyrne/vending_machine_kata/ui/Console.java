@@ -15,8 +15,17 @@ import com.evanbyrne.vending_machine_kata.coin.CoinFactory;
 import com.evanbyrne.vending_machine_kata.inventory.IInventoryService;
 import com.evanbyrne.vending_machine_kata.inventory.InventoryProduct;
 
+/**
+ * Manages console input and output.
+ */
 public class Console {
 
+    /**
+     * Get change display for terminal output.
+     *
+     * @param Change.
+     * @return Formatted message.
+     */
     public String getChangeDisplay(final CoinCollection change) {
         final ArrayList<String> display = new ArrayList<String>();
         final LinkedHashMap<Coin, Integer> coinMap = new LinkedHashMap<Coin, Integer>();
@@ -47,6 +56,12 @@ public class Console {
         return String.join("\n", display);
     }
 
+    /**
+     * Get product listing display for terminal output.
+     *
+     * @param Sorted map of all inventory.
+     * @return Formatted message.
+     */
     public String getProductDisplay(final SortedMap<String, InventoryProduct> inventory) {
 
         if(!inventory.isEmpty()) {
@@ -65,6 +80,15 @@ public class Console {
         return "No items in vending machine.";
     }
 
+    /**
+     * Prompt user for payment.
+     *
+     * Loops until payment >= selected product cost.
+     *
+     * @param Scanner.
+     * @param A product representing their selection.
+     * @return Payment.
+     */
     public CoinCollection promptForPayment(final Scanner scanner, final InventoryProduct selection) {
         final CoinCollection paid = new CoinCollection();
         Coin insert;
@@ -86,6 +110,15 @@ public class Console {
         return paid;
     }
 
+    /**
+     * Prompt for product selection.
+     *
+     * Loops until a valid product has been selected.
+     *
+     * @param Scanner
+     * @param An implementation of IInventoryService.
+     * @return A tuple with the product key and product.
+     */
     public Tuple2<String, InventoryProduct> promptForSelection(final Scanner scanner, final IInventoryService inventoryService) {
         InventoryProduct selection;
         String input;
